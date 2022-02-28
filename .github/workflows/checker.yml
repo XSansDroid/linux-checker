@@ -3,7 +3,7 @@ name: Linux Tag Checker
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: '0 * * * *'
 
