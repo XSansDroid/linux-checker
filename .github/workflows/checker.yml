@@ -1,0 +1,23 @@
+name: Linux Tag Checker
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 * * * *'
+
+env:
+  CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+  TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+
+jobs:
+  Runner:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Do Check Nows
+      run: |
+        bash goNotif
