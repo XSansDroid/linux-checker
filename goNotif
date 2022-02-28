@@ -1,0 +1,54 @@
+#!/bin/bash
+# Copyright ©2022 XSans02
+
+# Install Deps
+sudo apt-get install -y curl git
+
+# Cloning Telegram source
+git clone --depth=1 https://github.com/XSans02/Telegram Telegram
+
+# Telegram Setup
+TELEGRAM=Telegram/telegram
+
+send_msg() {
+  "${TELEGRAM}" -c "${CHANNEL_ID}" -H -D \
+      "$(
+          for POST in "${@}"; do
+              echo "${POST}"
+          done
+      )"
+}
+
+ForA="$(cat 4.14)"
+
+git config user.name "XSansDroid"
+git config user.email "xsansactions4@gmail.com"
+
+git add . && git commit -sm 'Update for next notif' && git push -f --all
+
+link="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+
+send_msg  "<b>New Linux 4.14 Series Available</b>" \
+          "<b>Tags : </b><code>${1}</code>" \
+          "<b>Link : </b>$link"
+
+Total="0"
+while [[ "$Total" != "58" ]];do
+    if [[ -z "${TELEGRAM_TOKEN}" ]];then
+        echo "Bot token null"
+        exit
+    else
+        wget https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y -O A.txt
+
+        if [[ ! -z "$(cat A.txt | grep "SUBLEVEL = $ForA")" ]];then
+            SendInfo "4.14.${ForA}" "std"
+            ForA=$(($ForA+1))
+            echo $ForA > 4.14
+        fi
+        rm -rf A.txt
+    fi
+    sleep 60s
+    Total=$(($Total+1))
+    git add . && git commit -sm 'Update for next notif'
+    git push -f --all
+done
