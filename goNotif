@@ -4,7 +4,7 @@
 # Install Deps
 sudo apt-get install -y curl git
 
-ForA="$(cat 4.14)"
+TAG="$(cat 4.14)"
 
 git config user.name "XSansDroid"
 git config user.email "xsansactions4@gmail.com"
@@ -36,14 +36,14 @@ while [[ "$Total" != "58" ]]; do
     else
         wget https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y -O A.txt
 
-        if [[ ! -z "$(cat A.txt | grep "SUBLEVEL = $ForA")" ]]; then
-            send_msg  "<b>New Linux Tag 4.14.${ForA} Available</b>" \
+        if [[ ! -z "$(cat A.txt | grep "SUBLEVEL = $TAG")" ]]; then
+            send_msg  "<b>New Linux Tag 4.14.${TAG} Available</b>" \
                       " " \
                       "$link" \
                       " " \
                       "<b>When Upstream sir?</b>"
-            ForA=$(($ForA+1))
-            echo $ForA > 4.14
+            TAG=$(($TAG+1))
+            echo $TAG > 4.14
         fi
         rm -rf A.txt Telegram
     fi
