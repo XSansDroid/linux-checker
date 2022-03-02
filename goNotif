@@ -37,15 +37,15 @@ while [[ "$Total" != "58" ]]; do
         wget https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/plain/Makefile?h=linux-4.14.y -O A.txt
 
         if [[ ! -z "$(cat A.txt | grep "SUBLEVEL = $TAG")" ]]; then
-            send_msg  "<b>New Linux Tag 4.14.${TAG} Available</b>" \
+            send_msg  "<b>New Kernel Tags</b><code> 4.14.${TAG} </code><b>Detected!</b>" \
                       " " \
                       "$link" \
                       " " \
-                      "<b>When Upstream sir?</b>"
+                      "<b>When Upstream Sir?</b>"
             TAG=$(($TAG+1))
             echo $TAG > 4.14
         fi
-        rm -rf A.txt Telegram
+        rm -rf A.txt
     fi
     sleep 60s
     Total=$(($Total+1))
