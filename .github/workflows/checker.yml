@@ -10,6 +10,7 @@ on:
 env:
   CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
   TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+  GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
 jobs:
   goCheck:
