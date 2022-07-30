@@ -5,19 +5,21 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 * * * *'
+    - cron: '5 * * * *'
 
 env:
   CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
   TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
 
 jobs:
-  Runner:
+  goCheck:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Do Check Nows
+    - name: Check now
       run: |
-        bash goNotif
+        git clone https://XSans0:$GIT_TOKEN@github.com/XSans0/linux-tag-checker.git
+        cd linux-tag-checker
+        bash check.sh
